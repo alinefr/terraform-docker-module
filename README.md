@@ -15,5 +15,5 @@ This module uses under the hood [Docker Provider](https://www.terraform.io/docs/
 
 ## Aditional documentation
 
-Full documentation for [Terraform Docker Module](https://github.com/alinefr/terraform-docker-module/blob/master/modules/docker/README.md).
+Full documentation for [Terraform Docker Module](https://github.com/alinefr/terraform-docker-module/blob/main/modules/docker/README.md).
 
