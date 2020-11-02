@@ -1,12 +1,3 @@
-/**
- * # Terraform Docker Module
- *
- * This module allows to maintain docker images, volumes, networks 
- * & containers.
- *
- * It replaces docker-compose for docker management.
- */
-
 data "docker_registry_image" "default" {
   name = var.docker_image
 }
@@ -42,6 +33,7 @@ resource "docker_container" "default" {
   working_dir  = var.working_dir
   dns          = var.dns
   command      = var.command
+  env          = var.env
 
   dynamic "ports" {
     for_each = var.ports == null ? [] : var.ports
@@ -98,5 +90,3 @@ resource "docker_container" "default" {
     }
   }
 }
-
-
