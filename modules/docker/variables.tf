@@ -1,29 +1,38 @@
+# Remote docker image
 variable "docker_image" { type = string }
+# Docker container name
 variable "docker_name" { type = string }
+# Working dir
 variable "working_dir" {
   type    = string
   default = null
 }
+# Restart policy
 variable "restart" {
   type    = string
   default = "unless-stopped"
 }
+# If we need full privileges
 variable "privileged" {
   type    = bool
   default = false
 }
+# Network mode
 variable "network_mode" {
   type    = string
   default = null
 }
+# Custom dns for container
 variable "dns" {
   type    = list(string)
   default = null
 }
+# Custom command
 variable "command" {
   type    = list(string)
   default = null
 }
+# Exported ports
 variable "ports" {
   type = list(object({
     internal = number
@@ -32,6 +41,7 @@ variable "ports" {
   }))
   default = null
 }
+# Mounted volumes
 variable "volumes" {
   type = list(object({
     volume_name    = string
@@ -41,6 +51,7 @@ variable "volumes" {
   }))
   default = null
 }
+# Exported devices
 variable "devices" {
   type = list(object({
     host_path      = string
@@ -49,6 +60,7 @@ variable "devices" {
   }))
   default = null
 }
+# Additional capabilities
 variable "capabilities" {
   type = object({
     add  = list(string)
@@ -56,6 +68,7 @@ variable "capabilities" {
   })
   default = null
 }
+# Custom network
 variable "networks_advanced" {
   type = object({
     name         = string
@@ -63,6 +76,7 @@ variable "networks_advanced" {
   })
   default = null
 }
+# Healthcheck
 variable "healthcheck" {
   type = object({
     interval     = string
@@ -73,14 +87,17 @@ variable "healthcheck" {
   })
   default = null
 }
+# Environment variables
 variable "env" {
   type    = list(string)
   default = null
 }
+# Docker volumes to create
 variable "docker_volumes" {
   type    = list(string)
   default = null
 }
+# Docker networks to create
 variable "docker_networks" {
   type = list(object({
     name = string
