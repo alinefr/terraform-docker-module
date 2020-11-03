@@ -29,7 +29,7 @@ jobs:
     - uses: actions/github-script@v3
       if: github.event_name == 'pull_request'
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.GH_TOKEN }}
         script: |
           const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
           #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
