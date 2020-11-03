@@ -1,3 +1,4 @@
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -35,3 +36,5 @@
 ## Outputs
 
 No output.
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
