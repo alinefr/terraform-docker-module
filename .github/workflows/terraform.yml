@@ -1,4 +1,7 @@
-on: push
+on:
+  - push
+  - pull_request
+
 env:
     tf_actions_working_dir: modules/docker
 
@@ -11,7 +14,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
-    - uses: hashicorp/setup-terraform@v1
+    - uses: hashicorp/setup-terraform@v1.2.1
 
     - name: Terraform fmt
       id: fmt
@@ -29,7 +32,7 @@ jobs:
     - uses: actions/github-script@v3
       if: github.event_name == 'pull_request'
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.GH_TOKEN }}
         script: |
           const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
           #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
