@@ -1,6 +1,7 @@
 on:
-  - push
-  - pull_request
+  push:
+    branches-ignore:
+      - master
 
 env:
     tf_actions_working_dir: modules/docker
@@ -46,4 +47,3 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
-
