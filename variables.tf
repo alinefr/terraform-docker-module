@@ -1,30 +1,44 @@
-variable "docker_image" { type = string }
-variable "docker_name" { type = string }
-variable "working_dir" {
-  type    = string
-  default = null
+variable "image" {
+  description = "Specify the image to start the container from. Can either be a repository/tag or a partial image ID"
+  type        = string
 }
-variable "restart" {
-  type    = string
-  default = "unless-stopped"
+variable "name" {
+  description = "Custom container name"
+  type        = string
+  default     = null
+}
+variable "working_dir" {
+  description = "Working directory inside the container"
+  type        = string
+  default     = null
+}
+variable "restart_policy" {
+  description = "Restart policy. Default: unless-stopped"
+  type        = string
+  default     = "unless-stopped"
 }
 variable "privileged" {
-  type    = bool
-  default = false
+  description = "Give extended privileges to this container"
+  type        = bool
+  default     = false
 }
 variable "network_mode" {
-  type    = string
-  default = null
+  description = "Specify a custom network mode"
+  type        = string
+  default     = null
 }
 variable "dns" {
-  type    = list(string)
-  default = null
+  description = "Set custom dns servers for the container"
+  type        = list(string)
+  default     = null
 }
 variable "command" {
-  type    = list(string)
-  default = null
+  description = "Override the default command"
+  type        = list(string)
+  default     = null
 }
 variable "ports" {
+  description = "Expose ports"
   type = list(object({
     internal = number
     external = number
@@ -33,6 +47,7 @@ variable "ports" {
   default = null
 }
 variable "volumes" {
+  description = "Mount host paths or named volumes, specified as sub-options to a service"
   type = list(object({
     volume_name    = string
     container_path = string
@@ -42,6 +57,7 @@ variable "volumes" {
   default = null
 }
 variable "devices" {
+  description = "Device mappings"
   type = list(object({
     host_path      = string
     container_path = string
@@ -50,6 +66,7 @@ variable "devices" {
   default = null
 }
 variable "capabilities" {
+  description = "Add or drop container capabilities"
   type = object({
     add  = list(string)
     drop = list(string)
@@ -57,6 +74,7 @@ variable "capabilities" {
   default = null
 }
 variable "networks_advanced" {
+  description = "Advanced network options for the container"
   type = object({
     name         = string
     ipv4_address = string
@@ -64,6 +82,7 @@ variable "networks_advanced" {
   default = null
 }
 variable "healthcheck" {
+  description = "Test to check if container is healthy"
   type = object({
     interval     = string
     retries      = number
@@ -73,15 +92,18 @@ variable "healthcheck" {
   })
   default = null
 }
-variable "env" {
-  type    = list(string)
-  default = null
+variable "environment" {
+  description = "Add environment variables"
+  type        = list(string)
+  default     = null
 }
 variable "docker_volumes" {
-  type    = list(string)
-  default = null
+  description = "List of named volumes to create"
+  type        = list(string)
+  default     = null
 }
 variable "docker_networks" {
+  description = "List of custom networks to create"
   type = list(object({
     name = string
     ipam_config = object({
