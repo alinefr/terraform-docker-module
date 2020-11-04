@@ -1,36 +1,29 @@
-name: release
+name: New Release
+
 on:
   push:
     tags:
       - 'v*'
 jobs:
-  goreleaser:
+  release:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Unshallow
-        run: git fetch --prune --unshallow
-      -
-        name: Set up Go
-        uses: actions/setup-go@v2
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v3
         with:
-          go-version: 1.14
-      -
-        name: Import GPG key
-        id: import_gpg
-        uses: paultyng/ghaction-import-gpg@v2.1.0
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
+          git-tag-gpgsign: true
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
-      -
-        name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Create GitHub release
+        uses: Roang-zero1/github-create-release-action@v2
         with:
-          version: latest
-          args: release --rm-dist
+          version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
         env:
-          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
