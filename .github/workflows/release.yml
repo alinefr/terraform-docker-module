@@ -22,7 +22,7 @@ jobs:
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Create GitHub release
-        uses: Roang-zero1/github-create-release-action@v2
+        uses: Roang-zero1/github-create-release-action@v2.1.0
         with:
           version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
         env:
