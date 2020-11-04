@@ -30,23 +30,23 @@ This module uses under the hood [Docker Provider](https://www.terraform.io/docs/
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| capabilities | n/a | <pre>object({<br>    add  = list(string)<br>    drop = list(string)<br>  })</pre> | `null` | no |
-| command | n/a | `list(string)` | `null` | no |
-| devices | n/a | <pre>list(object({<br>    host_path      = string<br>    container_path = string<br>    permissions    = string<br>  }))</pre> | `null` | no |
-| dns | n/a | `list(string)` | `null` | no |
-| docker\_image | n/a | `string` | n/a | yes |
-| docker\_name | n/a | `string` | n/a | yes |
-| docker\_networks | n/a | <pre>list(object({<br>    name = string<br>    ipam_config = object({<br>      aux_address = map(string)<br>      gateway     = string<br>      subnet      = string<br>    })<br>  }))</pre> | `null` | no |
-| docker\_volumes | n/a | `list(string)` | `null` | no |
-| env | n/a | `list(string)` | `null` | no |
-| healthcheck | n/a | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
-| network\_mode | n/a | `string` | `null` | no |
-| networks\_advanced | n/a | <pre>object({<br>    name         = string<br>    ipv4_address = string<br>  })</pre> | `null` | no |
-| ports | n/a | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
-| privileged | n/a | `bool` | `false` | no |
-| restart | n/a | `string` | `"unless-stopped"` | no |
-| volumes | n/a | <pre>list(object({<br>    volume_name    = string<br>    container_path = string<br>    host_path      = string<br>    read_only      = bool<br>  }))</pre> | `null` | no |
-| working\_dir | n/a | `string` | `null` | no |
+| capabilities | Add or drop container capabilities | <pre>object({<br>    add  = list(string)<br>    drop = list(string)<br>  })</pre> | `null` | no |
+| command | Override the default command | `list(string)` | `null` | no |
+| devices | Device mappings | <pre>list(object({<br>    host_path      = string<br>    container_path = string<br>    permissions    = string<br>  }))</pre> | `null` | no |
+| dns | Set custom dns servers for the container | `list(string)` | `null` | no |
+| docker\_networks | List of custom networks to create | <pre>list(object({<br>    name = string<br>    ipam_config = object({<br>      aux_address = map(string)<br>      gateway     = string<br>      subnet      = string<br>    })<br>  }))</pre> | `null` | no |
+| docker\_volumes | List of named volumes to create | `list(string)` | `null` | no |
+| environment | Add environment variables | `list(string)` | `null` | no |
+| healthcheck | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
+| image | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
+| name | Custom container name | `string` | `null` | no |
+| network\_mode | Specify a custom network mode | `string` | `null` | no |
+| networks\_advanced | Advanced network options for the container | <pre>object({<br>    name         = string<br>    ipv4_address = string<br>  })</pre> | `null` | no |
+| ports | Expose ports | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
+| privileged | Give extended privileges to this container | `bool` | `false` | no |
+| restart\_policy | Restart policy. Default: unless-stopped | `string` | `"unless-stopped"` | no |
+| volumes | Mount host paths or named volumes, specified as sub-options to a service | <pre>list(object({<br>    volume_name    = string<br>    container_path = string<br>    host_path      = string<br>    read_only      = bool<br>  }))</pre> | `null` | no |
+| working\_dir | Working directory inside the container | `string` | `null` | no |
 
 ## Outputs
 
