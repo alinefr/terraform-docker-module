@@ -17,12 +17,11 @@ jobs:
           node-version: 12.x
       - name: Install GH Conventional Release
         run: sudo npm install -g escaletech/circleci-gh-conventional-release
-      - name: Set environment variables
-        run: |
-          echo "GITHUB_TOKEN=${GH_TOKEN}" >> GITHUB_ENV \
-          echo "TARGET_TAG=${GITHUB_REF#refs/*/}" >> GITHUB_ENV \
-          echo "REPO_OWNER=${GITHUB_REPOSITORY%/*}" >> GITHUB_ENV \
-          echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> GITHUB_ENV \
-          echo "CONTINUE_ON_ERROR=false" GITHUB_ENV
       - name: Generate Release
-        run: circleci-gh-conventional-release
+        run: |
+          GITHUB_TOKEN="${GH_TOKEN}" \
+            TARGET_TAG=${GITHUB_REF#refs/*/}" \
+            REPO_OWNER=${GITHUB_REPOSITORY%/*}" \
+            REPO_NAME=${GITHUB_REPOSITORY#*/}" \
+            CONTINUE_ON_ERROR=false" \
+            circleci-gh-conventional-release
