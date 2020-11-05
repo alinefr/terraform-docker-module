@@ -18,11 +18,9 @@ jobs:
       - run: sudo npm install -g escaletech/circleci-gh-conventional-release
       - name: Generate Release
       - run: |
-        REPO_OWNER=$(echo '{{ github.repository }}' | awk -F '/' '{print $0}')
-        REPO_NAME=$(echo '{{ github.repository }}' | awk -F '/' '{print $1}')
         GITHUB_TOKEN="${GH_TOKEN}" \
                       TARGET_TAG="${GITHUB_REF#refs/*/}" \
-                      REPO_OWNER="${REPO_OWNER}" \
-                      REPO_NAME="${REPO_NAME}" \
+                      REPO_OWNER="${GITHUB_REPOSITORY%/*}" \
+                      REPO_NAME="${GITHUB_REPOSITORY#*/}" \
                       CONTINUE_ON_ERROR="false" \
                       circleci-gh-conventional-release
