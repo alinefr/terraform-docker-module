@@ -10,9 +10,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Create GitHub release
-        uses: Roang-zero1/github-create-release-action@v2.1.0
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
-          version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          node-version: 12.x
+      - name: Install GH Conventional Release
+      - run: sudo npm install -g escaletech/circleci-gh-conventional-release
+      - name: Generate Release
+      - run: |
+        REPO_OWNER=$(echo '{{ github.repository }}' | awk -F '/' '{print $0}')
+        REPO_NAME=$(echo '{{ github.repository }}' | awk -F '/' '{print $1}')
+        GITHUB_TOKEN="${GH_TOKEN}" \
+                      TARGET_TAG="${GITHUB_REF#refs/*/}" \
+                      REPO_OWNER="${REPO_OWNER}" \
+                      REPO_NAME="${REPO_NAME}" \
+                      CONTINUE_ON_ERROR="false" \
+                      circleci-gh-conventional-release
