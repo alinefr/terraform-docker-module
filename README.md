@@ -44,7 +44,7 @@ This module uses under the hood [Docker Provider](https://www.terraform.io/docs/
 | networks\_advanced | Advanced network options for the container | <pre>object({<br>    name         = string<br>    ipv4_address = string<br>  })</pre> | `null` | no |
 | ports | Expose ports | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
 | privileged | Give extended privileges to this container | `bool` | `false` | no |
-| restart\_policy | Restart policy. Default: unless-stopped | `string` | `"unless-stopped"` | no |
+| restart\_policy | Restart policy. Default: no | `string` | `"no"` | no |
 | volumes | Mount host paths or named volumes, specified as sub-options to a service | <pre>list(object({<br>    volume_name    = string<br>    container_path = string<br>    host_path      = string<br>    read_only      = bool<br>  }))</pre> | `null` | no |
 | working\_dir | Working directory inside the container | `string` | `null` | no |
 
