@@ -13,6 +13,96 @@ There are several advantages of maintaining docker on terraform.
 
 This module uses under the hood [Docker Provider](https://www.terraform.io/docs/providers/docker/index.html).
 
+Example:
+
+```hcl
+provider "docker" {
+  host = "tcp://192.168.0.100:2375/"
+}
+
+module "proxy" {
+  source = "alinefr/module/docker"
+  version = "2.1.0"
+
+  image = "masnagam/nginx-proxy:latest"
+  name = "proxy"
+  restart_policy = "always"
+  docker_volumes = [
+    "nginx_confs",
+    "nginx_html"
+  ]
+  docker_networks = [
+    {
+      name = "proxy-tier"
+      ipam_config = {
+        aux_address = {}
+        gateway = "10.0.20.1"
+        subnet = "10.0.20.0/24"
+      }
+    }
+  ]
+  ports = [
+    {
+      internal = 80
+      external = 80
+      protocol = "tcp"
+    },
+    {
+      internal = 443
+      external = 443
+      protocol = "tcp"
+    }
+  ]
+  volumes = [
+    {
+      volume_name = "nginx_confs"
+      container_path = "/etc/nginx/conf.d"
+      host_path = null
+      read_only = false
+      create = true
+    },
+    {
+      volume_name = "nginx_html"
+      container_path = "/var/www/html"
+      host_path = null
+      read_only = false
+      create = true
+    },
+    {
+      volume_name = null
+      container_path = "/etc/nginx/certs"
+      host_path = "/media/letsencrypt/etc/letsencrypt/live"
+      read_only = false
+      create = false
+    },
+    {
+      volume_name = null
+      container_path = "/etc/nginx/archive"
+      host_path = "/media/letsencrypt/etc/letsencrypt/archive"
+      read_only = false
+      create = false
+    },
+    {
+      volume_name = null
+      container_path = "/tmp/docker.sock"
+      host_path = "/var/run/docker.sock"
+      read_only = true
+      create = true
+    }
+  ]
+  capabilities = {
+    add = ["NET_ADMIN"]
+    drop = []
+  }
+  networks_advanced = {
+    name = "proxy-tier"
+    ipv4_address = "10.0.20.100"
+    ipv6_address = null
+    aliases = null
+  }
+}
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
