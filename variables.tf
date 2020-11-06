@@ -53,6 +53,7 @@ variable "volumes" {
     container_path = string
     host_path      = string
     read_only      = bool
+    create         = bool
   }))
   default = null
 }
@@ -77,6 +78,7 @@ variable "networks_advanced" {
   description = "Advanced network options for the container"
   type = object({
     name         = string
+    create       = bool
     aliases      = string
     ipv4_address = string
     ipv6_address = string
@@ -96,11 +98,6 @@ variable "healthcheck" {
 }
 variable "environment" {
   description = "Add environment variables"
-  type        = list(string)
-  default     = null
-}
-variable "docker_volumes" {
-  description = "List of named volumes to create"
   type        = list(string)
   default     = null
 }
