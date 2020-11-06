@@ -82,6 +82,8 @@ resource "docker_container" "default" {
     content {
       name         = var.networks_advanced.name
       ipv4_address = var.networks_advanced.ipv4_address
+      ipv6_address = var.networks_advanced.ipv6_address
+      aliases      = var.networks_advanced.aliases
     }
   }
 
