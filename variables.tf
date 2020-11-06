@@ -13,9 +13,9 @@ variable "working_dir" {
   default     = null
 }
 variable "restart_policy" {
-  description = "Restart policy. Default: unless-stopped"
+  description = "Restart policy. Default: no"
   type        = string
-  default     = "unless-stopped"
+  default     = "no"
 }
 variable "privileged" {
   description = "Give extended privileges to this container"
@@ -77,7 +77,9 @@ variable "networks_advanced" {
   description = "Advanced network options for the container"
   type = object({
     name         = string
+    aliases      = string
     ipv4_address = string
+    ipv6_address = string
   })
   default = null
 }
