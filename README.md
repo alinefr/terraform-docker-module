@@ -27,10 +27,6 @@ module "proxy" {
   image = "masnagam/nginx-proxy:latest"
   name = "proxy"
   restart_policy = "always"
-  docker_volumes = [
-    "nginx_confs",
-    "nginx_html"
-  ]
   docker_networks = [
     {
       name = "proxy-tier"
