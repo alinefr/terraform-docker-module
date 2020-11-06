@@ -19,12 +19,13 @@ This module uses under the hood [Docker Provider](https://www.terraform.io/docs/
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
+| docker | ~> 2.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| docker | n/a |
+| docker | ~> 2.7 |
 
 ## Inputs
 
