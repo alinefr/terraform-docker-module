@@ -78,7 +78,6 @@ variable "networks_advanced" {
   description = "Advanced network options for the container"
   type = object({
     name         = string
-    create       = bool
     aliases      = string
     ipv4_address = string
     ipv6_address = string
