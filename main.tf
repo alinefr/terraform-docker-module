@@ -14,8 +14,8 @@ resource "docker_image" "default" {
 }
 
 resource "docker_volume" "default" {
-  count = var.volumes != null ? length(matchkeys(var.volumes.*.volume_name, var.volumes.*.create, [true])) : 0
-  name  = var.volumes[count.index].volume_name
+  count = var.named_volumes != null ? length(matchkeys(var.named_volumes.*.volume_name, var.named_volumes.*.create, [true])) : 0
+  name  = var.named_volumes[count.index].volume_name
 }
 
 resource "docker_network" "default" {
@@ -51,9 +51,17 @@ resource "docker_container" "default" {
   }
 
   dynamic "volumes" {
-    for_each = var.volumes == null ? [] : var.volumes
+    for_each = var.named_volumes == null ? [] : var.named_volumes
     content {
       volume_name    = volumes.value.volume_name
+      container_path = volumes.value.container_path
+      read_only      = volumes.value.read_only
+    }
+  }
+
+  dynamic "volumes" {
+    for_each = var.host_paths == null ? [] : var.host_paths
+    content {
       host_path      = volumes.value.host_path
       container_path = volumes.value.container_path
       read_only      = volumes.value.read_only

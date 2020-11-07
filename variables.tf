@@ -46,14 +46,22 @@ variable "ports" {
   }))
   default = null
 }
-variable "volumes" {
-  description = "Mount host paths or named volumes, specified as sub-options to a service"
+variable "named_volumes" {
+  description = "Mount named volumes"
   type = list(object({
     volume_name    = string
     container_path = string
-    host_path      = string
     read_only      = bool
     create         = bool
+  }))
+  default = null
+}
+variable "host_paths" {
+  description = "Mount host paths"
+  type = list(object({
+    host_path      = string
+    container_path = string
+    read_only      = bool
   }))
   default = null
 }
