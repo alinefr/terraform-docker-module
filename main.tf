@@ -14,7 +14,7 @@ resource "docker_image" "default" {
 }
 
 resource "docker_volume" "default" {
-  count = length(matchkeys(var.volumes.*.volume_name, var.volumes.*.create, [true]))
+  count = var.volumes != null ? length(matchkeys(var.volumes.*.volume_name, var.volumes.*.create, [true])) : 0
   name  = var.volumes[count.index].volume_name
 }
 
