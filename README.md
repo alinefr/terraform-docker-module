@@ -22,7 +22,7 @@ provider "docker" {
 
 module "proxy" {
   source = "alinefr/module/docker"
-  version = "2.1.0"
+  version = "<add latest version>"
 
   image = "masnagam/nginx-proxy:latest"
   name = "proxy"
@@ -49,41 +49,35 @@ module "proxy" {
       protocol = "tcp"
     }
   ]
-  volumes = [
+  named_volumes = [
     {
       volume_name = "nginx_confs"
       container_path = "/etc/nginx/conf.d"
-      host_path = null
       read_only = false
       create = true
     },
     {
       volume_name = "nginx_html"
       container_path = "/var/www/html"
-      host_path = null
       read_only = false
       create = true
-    },
+    }
+  ]
+  host_paths = [
     {
-      volume_name = null
       container_path = "/etc/nginx/certs"
       host_path = "/media/letsencrypt/etc/letsencrypt/live"
       read_only = false
-      create = false
     },
     {
-      volume_name = null
       container_path = "/etc/nginx/archive"
       host_path = "/media/letsencrypt/etc/letsencrypt/archive"
       read_only = false
-      create = false
     },
     {
-      volume_name = null
       container_path = "/tmp/docker.sock"
       host_path = "/var/run/docker.sock"
       read_only = true
-      create = true
     }
   ]
   capabilities = {
