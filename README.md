@@ -127,7 +127,7 @@ module "proxy" {
 | image | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
 | name | Custom container name | `string` | `null` | no |
 | network\_mode | Specify a custom network mode | `string` | `null` | no |
-| networks\_advanced | Advanced network options for the container | <pre>object({<br>    name         = string<br>    create       = bool<br>    aliases      = string<br>    ipv4_address = string<br>    ipv6_address = string<br>  })</pre> | `null` | no |
+| networks\_advanced | Advanced network options for the container | <pre>object({<br>    name         = string<br>    aliases      = string<br>    ipv4_address = string<br>    ipv6_address = string<br>  })</pre> | `null` | no |
 | ports | Expose ports | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
 | privileged | Give extended privileges to this container | `bool` | `false` | no |
 | restart\_policy | Restart policy. Default: no | `string` | `"no"` | no |
