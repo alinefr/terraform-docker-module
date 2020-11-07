@@ -25,7 +25,7 @@ module "proxy" {
   version = "<add latest version>"
 
   image = "masnagam/nginx-proxy:latest"
-  name = "proxy"
+  container_name = "proxy"
   restart_policy = "always"
   docker_networks = [
     {
@@ -113,6 +113,7 @@ module "proxy" {
 |------|-------------|------|---------|:--------:|
 | capabilities | Add or drop container capabilities | <pre>object({<br>    add  = list(string)<br>    drop = list(string)<br>  })</pre> | `null` | no |
 | command | Override the default command | `list(string)` | `null` | no |
+| container\_name | Custom container name | `string` | `null` | no |
 | devices | Device mappings | <pre>list(object({<br>    host_path      = string<br>    container_path = string<br>    permissions    = string<br>  }))</pre> | `null` | no |
 | dns | Set custom dns servers for the container | `list(string)` | `null` | no |
 | docker\_networks | List of custom networks to create | <pre>list(object({<br>    name = string<br>    ipam_config = object({<br>      aux_address = map(string)<br>      gateway     = string<br>      subnet      = string<br>    })<br>  }))</pre> | `null` | no |
@@ -120,7 +121,6 @@ module "proxy" {
 | healthcheck | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
 | host\_paths | Mount host paths | <pre>list(object({<br>    host_path      = string<br>    container_path = string<br>    read_only      = bool<br>  }))</pre> | `null` | no |
 | image | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
-| name | Custom container name | `string` | `null` | no |
 | named\_volumes | Mount named volumes | <pre>list(object({<br>    volume_name    = string<br>    container_path = string<br>    read_only      = bool<br>    create         = bool<br>  }))</pre> | `null` | no |
 | network\_mode | Specify a custom network mode | `string` | `null` | no |
 | networks\_advanced | Advanced network options for the container | <pre>object({<br>    name         = string<br>    aliases      = list(string)<br>    ipv4_address = string<br>    ipv6_address = string<br>  })</pre> | `null` | no |

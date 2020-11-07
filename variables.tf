@@ -2,7 +2,7 @@ variable "image" {
   description = "Specify the image to start the container from. Can either be a repository/tag or a partial image ID"
   type        = string
 }
-variable "name" {
+variable "container_name" {
   description = "Custom container name"
   type        = string
   default     = null

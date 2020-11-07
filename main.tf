@@ -1,7 +1,7 @@
 locals {
-  image      = var.image
-  img_nouser = replace(local.image, "/", "") != local.image ? split("/", local.image)[1] : split("/", local.image)[0]
-  name       = split(":", local.img_nouser)[0]
+  image          = var.image
+  img_nouser     = replace(local.image, "/", "") != local.image ? split("/", local.image)[1] : split("/", local.image)[0]
+  container_name = split(":", local.img_nouser)[0]
 }
 
 data "docker_registry_image" "default" {
@@ -31,7 +31,7 @@ resource "docker_network" "default" {
 
 
 resource "docker_container" "default" {
-  name         = var.name != null ? var.name : local.name
+  name         = var.container_name != null ? var.container_name : local.container_name
   image        = docker_image.default.latest
   restart      = var.restart_policy
   privileged   = var.privileged
