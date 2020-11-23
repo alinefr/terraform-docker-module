@@ -7,6 +7,11 @@ variable "container_name" {
   type        = string
   default     = null
 }
+variable "hostname" {
+  description = "Set docker hostname"
+  type        = string
+  default     = null
+}
 variable "working_dir" {
   description = "Working directory inside the container"
   type        = string
