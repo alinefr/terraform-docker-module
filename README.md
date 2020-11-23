@@ -120,6 +120,7 @@ module "proxy" {
 | environment | Add environment variables | `list(string)` | `null` | no |
 | healthcheck | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
 | host\_paths | Mount host paths | <pre>list(object({<br>    host_path      = string<br>    container_path = string<br>    read_only      = bool<br>  }))</pre> | `null` | no |
+| hostname | Set docker hostname | `string` | `null` | no |
 | image | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
 | named\_volumes | Mount named volumes | <pre>list(object({<br>    volume_name    = string<br>    container_path = string<br>    read_only      = bool<br>    create         = bool<br>  }))</pre> | `null` | no |
 | network\_mode | Specify a custom network mode | `string` | `null` | no |
