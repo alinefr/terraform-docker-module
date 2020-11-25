@@ -69,6 +69,13 @@ resource "docker_container" "default" {
     }
   }
 
+  dynamic "volumes" {
+    for_each = var.volumes_from_containers == null ? [] : var.volumes_from_containers
+    content {
+      from_container = volumes.value.container_name
+    }
+  }
+
   dynamic "devices" {
     for_each = var.devices == null ? [] : var.devices
     content {

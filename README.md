@@ -91,6 +91,32 @@ module "proxy" {
     aliases = null
   }
 }
+
+module "letsencrypt-companion" {
+  source = "alinefr/module/docker"
+  version = "<add latest version>"
+
+  image = "jrcs/letsencrypt-nginx-proxy-companion"
+  container_name = "letsencrypt-companion"
+  restart_policy = "always"
+  volumes_from_containers = [
+    {
+      container_name = "proxy"
+    }
+  ]
+    {
+      container_path = "/var/run/docker.sock"
+      host_path = "/var/run/docker.sock"
+      read_only = true
+    }
+  ]
+  networks_advanced = {
+    name = "proxy-tier"
+    ipv4_address = "10.0.20.101"
+    ipv6_address = null
+    aliases = null
+  }
+}
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -128,6 +154,7 @@ module "proxy" {
 | ports | Expose ports | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
 | privileged | Give extended privileges to this container | `bool` | `false` | no |
 | restart\_policy | Restart policy. Default: no | `string` | `"no"` | no |
+| volumes\_from\_containers | Mount volumes from another container | <pre>list(object({<br>    container_name = string<br>  }))</pre> | `null` | no |
 | working\_dir | Working directory inside the container | `string` | `null` | no |
 
 ## Outputs
