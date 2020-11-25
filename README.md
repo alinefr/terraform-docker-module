@@ -104,6 +104,7 @@ module "letsencrypt-companion" {
       container_name = "proxy"
     }
   ]
+  host_paths = [
     {
       container_path = "/var/run/docker.sock"
       host_path = "/var/run/docker.sock"
