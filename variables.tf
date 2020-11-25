@@ -70,6 +70,13 @@ variable "host_paths" {
   }))
   default = null
 }
+variable "volumes_from_containers" {
+  description = "Mount volumes from another container"
+  type = list(object({
+    container_name = string
+  }))
+  default = null
+}
 variable "devices" {
   description = "Device mappings"
   type = list(object({
