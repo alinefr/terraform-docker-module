@@ -14,18 +14,18 @@ resource "docker_image" "default" {
 }
 
 resource "docker_volume" "default" {
-  count = var.named_volumes != null ? length(matchkeys(var.named_volumes.*.volume_name, var.named_volumes.*.create, [true])) : 0
-  name  = var.named_volumes[count.index].volume_name
+  for_each = var.named_volumes
+  name     = each.key
 }
 
 resource "docker_network" "default" {
-  count = var.docker_networks != null ? length(var.docker_networks) : 0
-  name  = var.docker_networks[count.index].name
+  for_each = var.docker_networks
+  name     = each.key
 
   ipam_config {
-    aux_address = var.docker_networks[count.index].ipam_config.aux_address
-    gateway     = var.docker_networks[count.index].ipam_config.gateway
-    subnet      = var.docker_networks[count.index].ipam_config.subnet
+    aux_address = each.value.ipam_config.aux_address
+    gateway     = each.value.ipam_config.gateway
+    subnet      = each.value.ipam_config.subnet
   }
 }
 
@@ -52,18 +52,18 @@ resource "docker_container" "default" {
   }
 
   dynamic "volumes" {
-    for_each = var.named_volumes == null ? [] : var.named_volumes
+    for_each = var.named_volumes
     content {
-      volume_name    = volumes.value.volume_name
+      volume_name    = volumes.key
       container_path = volumes.value.container_path
       read_only      = volumes.value.read_only
     }
   }
 
   dynamic "volumes" {
-    for_each = var.host_paths == null ? [] : var.host_paths
+    for_each = var.host_paths
     content {
-      host_path      = volumes.value.host_path
+      host_path      = volumes.key
       container_path = volumes.value.container_path
       read_only      = volumes.value.read_only
     }
@@ -72,14 +72,14 @@ resource "docker_container" "default" {
   dynamic "volumes" {
     for_each = var.volumes_from_containers == null ? [] : var.volumes_from_containers
     content {
-      from_container = volumes.value.container_name
+      from_container = volumes.value
     }
   }
 
   dynamic "devices" {
-    for_each = var.devices == null ? [] : var.devices
+    for_each = var.devices
     content {
-      host_path      = devices.value.host_path
+      host_path      = devices.key
       container_path = devices.value.container_path
       permissions    = devices.value.permissions
     }
