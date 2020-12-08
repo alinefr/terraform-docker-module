@@ -53,38 +53,33 @@ variable "ports" {
 }
 variable "named_volumes" {
   description = "Mount named volumes"
-  type = list(object({
-    volume_name    = string
+  type = map(object({
     container_path = string
     read_only      = bool
     create         = bool
   }))
-  default = null
+  default = {}
 }
 variable "host_paths" {
   description = "Mount host paths"
-  type = list(object({
-    host_path      = string
+  type = map(object({
     container_path = string
     read_only      = bool
   }))
-  default = null
+  default = {}
 }
 variable "volumes_from_containers" {
   description = "Mount volumes from another container"
-  type = list(object({
-    container_name = string
-  }))
-  default = null
+  type        = list
+  default     = null
 }
 variable "devices" {
   description = "Device mappings"
-  type = list(object({
-    host_path      = string
+  type = map(object({
     container_path = string
     permissions    = string
   }))
-  default = null
+  default = {}
 }
 variable "capabilities" {
   description = "Add or drop container capabilities"
@@ -122,13 +117,12 @@ variable "environment" {
 }
 variable "docker_networks" {
   description = "List of custom networks to create"
-  type = list(object({
-    name = string
+  type = map(object({
     ipam_config = object({
       aux_address = map(string)
       gateway     = string
       subnet      = string
     })
   }))
-  default = null
+  default = {}
 }
