@@ -151,6 +151,9 @@ module "letsencrypt-companion" {
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| devices | n/a |
+| volumes | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

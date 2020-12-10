@@ -14,6 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: hashicorp/setup-terraform@v1.2.1
+      with:
+        terraform_wrapper: false
 
     - name: Terraform fmt
       id: fmt
@@ -28,20 +30,6 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
-    - uses: actions/github-script@v3
-      if: github.event_name == 'pull_request'
-      with:
-        github-token: ${{ secrets.GH_TOKEN }}
-        script: |
-          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-
-          github.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: output
-          })
+    - name: Integration tests
+      id: test
+      run: make test
