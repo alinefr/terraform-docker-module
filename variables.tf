@@ -70,7 +70,7 @@ variable "host_paths" {
 }
 variable "volumes_from_containers" {
   description = "Mount volumes from another container"
-  type        = list
+  type        = list(any)
   default     = null
 }
 variable "devices" {

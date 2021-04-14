@@ -86,7 +86,7 @@ resource "docker_container" "default" {
   }
 
   dynamic "capabilities" {
-    for_each = var.capabilities == null ? [] : list(var.capabilities)
+    for_each = var.capabilities == null ? [] : [var.capabilities]
     content {
       add  = var.capabilities.add
       drop = var.capabilities.drop
@@ -94,7 +94,7 @@ resource "docker_container" "default" {
   }
 
   dynamic "networks_advanced" {
-    for_each = var.networks_advanced == null ? [] : list(var.networks_advanced)
+    for_each = var.networks_advanced == null ? [] : [var.networks_advanced]
     content {
       name         = var.networks_advanced.name
       ipv4_address = var.networks_advanced.ipv4_address
@@ -104,7 +104,7 @@ resource "docker_container" "default" {
   }
 
   dynamic "healthcheck" {
-    for_each = var.healthcheck == null ? [] : list(var.healthcheck)
+    for_each = var.healthcheck == null ? [] : [var.healthcheck]
     content {
       interval     = var.healthcheck.interval
       retries      = var.healthcheck.retries
