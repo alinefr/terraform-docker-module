@@ -116,44 +116,57 @@ module "letsencrypt-companion" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.13 |
-| docker | ~> 2.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_docker"></a> [docker](#requirement\_docker) | ~> 2.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| docker | ~> 2.7 |
+| <a name="provider_docker"></a> [docker](#provider\_docker) | ~> 2.7 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [docker_container.default](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container) | resource |
+| [docker_image.default](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/image) | resource |
+| [docker_network.default](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/network) | resource |
+| [docker_volume.default](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/volume) | resource |
+| [docker_registry_image.default](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/data-sources/registry_image) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| capabilities | Add or drop container capabilities | <pre>object({<br>    add  = list(string)<br>    drop = list(string)<br>  })</pre> | `null` | no |
-| command | Override the default command | `list(string)` | `null` | no |
-| container\_name | Custom container name | `string` | `null` | no |
-| devices | Device mappings | <pre>map(object({<br>    container_path = string<br>    permissions    = string<br>  }))</pre> | `{}` | no |
-| dns | Set custom dns servers for the container | `list(string)` | `null` | no |
-| docker\_networks | List of custom networks to create | <pre>map(object({<br>    ipam_config = object({<br>      aux_address = map(string)<br>      gateway     = string<br>      subnet      = string<br>    })<br>  }))</pre> | `{}` | no |
-| environment | Add environment variables | `list(string)` | `null` | no |
-| healthcheck | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
-| host\_paths | Mount host paths | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>  }))</pre> | `{}` | no |
-| hostname | Set docker hostname | `string` | `null` | no |
-| image | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
-| named\_volumes | Mount named volumes | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>    create         = bool<br>  }))</pre> | `{}` | no |
-| network\_mode | Specify a custom network mode | `string` | `null` | no |
-| networks\_advanced | Advanced network options for the container | <pre>object({<br>    name         = string<br>    aliases      = list(string)<br>    ipv4_address = string<br>    ipv6_address = string<br>  })</pre> | `null` | no |
-| ports | Expose ports | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
-| privileged | Give extended privileges to this container | `bool` | `false` | no |
-| restart\_policy | Restart policy. Default: no | `string` | `"no"` | no |
-| volumes\_from\_containers | Mount volumes from another container | `list` | `null` | no |
-| working\_dir | Working directory inside the container | `string` | `null` | no |
+| <a name="input_capabilities"></a> [capabilities](#input\_capabilities) | Add or drop container capabilities | <pre>object({<br>    add  = list(string)<br>    drop = list(string)<br>  })</pre> | `null` | no |
+| <a name="input_command"></a> [command](#input\_command) | Override the default command | `list(string)` | `null` | no |
+| <a name="input_container_name"></a> [container\_name](#input\_container\_name) | Custom container name | `string` | `null` | no |
+| <a name="input_devices"></a> [devices](#input\_devices) | Device mappings | <pre>map(object({<br>    container_path = string<br>    permissions    = string<br>  }))</pre> | `{}` | no |
+| <a name="input_dns"></a> [dns](#input\_dns) | Set custom dns servers for the container | `list(string)` | `null` | no |
+| <a name="input_docker_networks"></a> [docker\_networks](#input\_docker\_networks) | List of custom networks to create | <pre>map(object({<br>    ipam_config = object({<br>      aux_address = map(string)<br>      gateway     = string<br>      subnet      = string<br>    })<br>  }))</pre> | `{}` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | Add environment variables | `list(string)` | `null` | no |
+| <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
+| <a name="input_host_paths"></a> [host\_paths](#input\_host\_paths) | Mount host paths | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>  }))</pre> | `{}` | no |
+| <a name="input_hostname"></a> [hostname](#input\_hostname) | Set docker hostname | `string` | `null` | no |
+| <a name="input_image"></a> [image](#input\_image) | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
+| <a name="input_named_volumes"></a> [named\_volumes](#input\_named\_volumes) | Mount named volumes | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>    create         = bool<br>  }))</pre> | `{}` | no |
+| <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | Specify a custom network mode | `string` | `null` | no |
+| <a name="input_networks_advanced"></a> [networks\_advanced](#input\_networks\_advanced) | Advanced network options for the container | <pre>object({<br>    name         = string<br>    aliases      = list(string)<br>    ipv4_address = string<br>    ipv6_address = string<br>  })</pre> | `null` | no |
+| <a name="input_ports"></a> [ports](#input\_ports) | Expose ports | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
+| <a name="input_privileged"></a> [privileged](#input\_privileged) | Give extended privileges to this container | `bool` | `false` | no |
+| <a name="input_restart_policy"></a> [restart\_policy](#input\_restart\_policy) | Restart policy. Default: no | `string` | `"no"` | no |
+| <a name="input_volumes_from_containers"></a> [volumes\_from\_containers](#input\_volumes\_from\_containers) | Mount volumes from another container | `list(any)` | `null` | no |
+| <a name="input_working_dir"></a> [working\_dir](#input\_working\_dir) | Working directory inside the container | `string` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| devices | n/a |
-| volumes | n/a |
-
+| <a name="output_devices"></a> [devices](#output\_devices) | n/a |
+| <a name="output_volumes"></a> [volumes](#output\_volumes) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
