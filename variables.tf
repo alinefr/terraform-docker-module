@@ -112,7 +112,7 @@ variable "healthcheck" {
 }
 variable "environment" {
   description = "Add environment variables"
-  type        = list(string)
+  type        = map(string)
   default     = null
 }
 variable "docker_networks" {

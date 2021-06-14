@@ -4,6 +4,7 @@ module "docker" {
   image          = "nginx"
   container_name = var.container_name
   restart_policy = "always"
+  environment    = var.environment
   docker_networks = {
     (var.network_name) = {
       ipam_config = {

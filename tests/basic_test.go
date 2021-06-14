@@ -65,7 +65,7 @@ func TestTerraformDockerSimple(t *testing.T) {
 	)
 
 	expectedPorts := []docker.Port{
-		docker.Port{
+		{
 			HostPort:      80,
 			ContainerPort: 80,
 			Protocol:      "tcp",
@@ -180,12 +180,12 @@ func TestTerraformDockerMultiple(t *testing.T) {
 	)
 
 	expectedPorts := []docker.Port{
-		docker.Port{
+		{
 			HostPort:      443,
 			ContainerPort: 443,
 			Protocol:      "tcp",
 		},
-		docker.Port{
+		{
 			HostPort:      80,
 			ContainerPort: 80,
 			Protocol:      "tcp",
@@ -286,4 +286,42 @@ func TestTerraformDockerWithoutPortsVolumesDevices(t *testing.T) {
 	assert.Equal(t, expectedPorts, actualPorts)
 	assert.Equal(t, expectedVolumes, actualVolumes)
 	assert.Equal(t, expectedDevices, actualDevices)
+}
+
+func TestTerraformDockerEnvironments(t *testing.T) {
+	containerName := "environments"
+	gateway := "10.0.30.1"
+	ipv4Address := "10.0.30.2"
+	subnet := "10.0.30.0/24"
+	networkName := "nginx_network"
+	environment := map[string]interface{}{
+		"ENV":  "test",
+		"NAME": "nginx",
+	}
+
+	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+		TerraformDir: "../examples/basic",
+
+		Vars: map[string]interface{}{
+			"container_name": containerName,
+			"gateway":        gateway,
+			"ipv4_address":   ipv4Address,
+			"subnet":         subnet,
+			"network_name":   networkName,
+			"environment":    environment,
+		},
+
+		NoColor: true,
+	})
+
+	defer terraform.Destroy(t, terraformOptions)
+
+	terraform.InitAndApply(t, terraformOptions)
+
+	expectedEnv := []string{
+		"ENV=test",
+		"NAME=nginx",
+	}
+	actualEnv := terraform.OutputList(t, terraformOptions, "environment")
+	assert.Equal(t, expectedEnv, actualEnv)
 }
