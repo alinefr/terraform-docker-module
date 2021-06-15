@@ -19,21 +19,26 @@ variable "subnet" {
 }
 
 variable "ports" {
-  type    = list
+  type    = list(any)
   default = null
 }
 
 variable "named_volumes" {
-  type    = map
+  type    = map(any)
   default = {}
 }
 
 variable "host_paths" {
-  type    = map
+  type    = map(any)
   default = {}
 }
 
 variable "devices" {
-  type    = map
+  type    = map(any)
   default = {}
+}
+
+variable "environment" {
+  type    = map(string)
+  default = null
 }

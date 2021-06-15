@@ -40,7 +40,7 @@ resource "docker_container" "default" {
   working_dir  = var.working_dir
   dns          = var.dns
   command      = var.command
-  env          = var.environment
+  env          = var.environment != null ? [for k, v in var.environment : "${k}=${v}"] : null
 
   dynamic "ports" {
     for_each = var.ports == null ? [] : var.ports
