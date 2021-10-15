@@ -117,4 +117,12 @@ resource "docker_container" "default" {
       timeout      = var.healthcheck.timeout
     }
   }
+
+  dynamic "labels" {
+    for_each = var.labels == null ? [] : [var.labels]
+    content {
+      label = var.labels.label
+      value = var.labels.value
+    }
+  }
 }

@@ -131,3 +131,11 @@ variable "create_before_destroy" {
   type        = bool
   default     = false
 }
+variable "labels" {
+  description = "Add labels in container"
+  type = map(object({
+    label = string
+    value = string
+  }))
+  default = null
+}
