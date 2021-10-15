@@ -126,3 +126,8 @@ variable "docker_networks" {
   }))
   default = {}
 }
+variable "create_before_destroy" {
+  description = "Create container before destroy"
+  type        = bool
+  default     = false
+}

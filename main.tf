@@ -42,6 +42,10 @@ resource "docker_container" "default" {
   command      = var.command
   env          = var.environment != null ? [for k, v in var.environment : "${k}=${v}"] : null
 
+  lifecycle {
+    create_before_destroy  = var.create_before_destroy
+  }
+
   dynamic "ports" {
     for_each = var.ports == null ? [] : var.ports
     content {
