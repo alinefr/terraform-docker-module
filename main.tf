@@ -32,7 +32,7 @@ resource "docker_network" "default" {
 
 resource "docker_container" "default" {
   name         = var.container_name != null ? var.container_name : local.container_name
-  image        = docker_image.default.latest
+  image        = docker_image.default.image_id
   hostname     = var.hostname
   restart      = var.restart_policy
   privileged   = var.privileged
