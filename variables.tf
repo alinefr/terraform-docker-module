@@ -37,6 +37,11 @@ variable "dns" {
   type        = list(string)
   default     = null
 }
+variable "entrypoint" {
+  description = "Override the default entrypoint"
+  type        = list(string)
+  default     = null
+}
 variable "command" {
   description = "Override the default command"
   type        = list(string)
