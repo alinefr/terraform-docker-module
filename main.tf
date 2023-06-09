@@ -14,8 +14,11 @@ resource "docker_image" "default" {
 }
 
 resource "docker_volume" "default" {
-  for_each = var.named_volumes
-  name     = each.key
+  for_each = {
+    for k, v in var.named_volumes : k => v
+    if lookup(v, "create", false) != false
+  }
+  name = each.key
 }
 
 resource "docker_network" "default" {
