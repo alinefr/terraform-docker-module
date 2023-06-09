@@ -39,6 +39,7 @@ resource "docker_container" "default" {
   network_mode = var.network_mode
   working_dir  = var.working_dir
   dns          = var.dns
+  entrypoint   = var.entrypoint
   command      = var.command
   env          = var.environment != null ? [for k, v in var.environment : "${k}=${v}"] : null
 

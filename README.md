@@ -149,6 +149,7 @@ No modules.
 | <a name="input_devices"></a> [devices](#input\_devices) | Device mappings | <pre>map(object({<br>    container_path = string<br>    permissions    = string<br>  }))</pre> | `{}` | no |
 | <a name="input_dns"></a> [dns](#input\_dns) | Set custom dns servers for the container | `list(string)` | `null` | no |
 | <a name="input_docker_networks"></a> [docker\_networks](#input\_docker\_networks) | List of custom networks to create | <pre>map(object({<br>    ipam_config = object({<br>      aux_address = map(string)<br>      gateway     = string<br>      subnet      = string<br>    })<br>  }))</pre> | `{}` | no |
+| <a name="input_entrypoint"></a> [entrypoint](#input\_entrypoint) | Override the default entrypoint | `list(string)` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Add environment variables | `map(string)` | `null` | no |
 | <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
 | <a name="input_host_paths"></a> [host\_paths](#input\_host\_paths) | Mount host paths | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>  }))</pre> | `{}` | no |
