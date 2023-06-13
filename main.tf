@@ -105,10 +105,10 @@ resource "docker_container" "default" {
   dynamic "networks_advanced" {
     for_each = local.networks_advanced_list == null ? [] : local.networks_advanced_list
     content {
-      name         = networks_advanced.value.name
-      ipv4_address = networks_advanced.value.ipv4_address
-      ipv6_address = networks_advanced.value.ipv6_address
-      aliases      = networks_advanced.value.aliases
+      name         = lookup(networks_advanced.value, "name", null)
+      ipv4_address = lookup(networks_advanced.value, "ipv4_address", null)
+      ipv6_address = lookup(networks_advanced.value, "ipv6_address", null)
+      aliases      = lookup(networks_advanced.value, "aliases", null)
     }
   }
 
