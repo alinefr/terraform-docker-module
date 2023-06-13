@@ -95,7 +95,21 @@ variable "capabilities" {
   default = null
 }
 variable "networks_advanced" {
-  description = "Advanced network options for the container"
+  description = <<EOD
+Advanced network options for the container
+```
+networks_advanced = [
+  {
+    name         = "proxy-tier"
+    ipv4_address = "10.0.0.14"
+  },
+  {
+    name         = "media-tier"
+    ipv4_address = "172.0.0.14"
+  }
+]
+```
+EOD
   type        = any
   default     = null
 }
