@@ -96,13 +96,8 @@ variable "capabilities" {
 }
 variable "networks_advanced" {
   description = "Advanced network options for the container"
-  type = object({
-    name         = string
-    aliases      = list(string)
-    ipv4_address = string
-    ipv6_address = string
-  })
-  default = null
+  type        = any
+  default     = null
 }
 variable "healthcheck" {
   description = "Test to check if container is healthy"

@@ -2,6 +2,11 @@ locals {
   image          = var.image
   img_nouser     = replace(local.image, "/", "") != local.image ? split("/", local.image)[1] : split("/", local.image)[0]
   container_name = split(":", local.img_nouser)[0]
+  networks_advanced = try(
+    element(var.networks_advanced, 0),
+    var.networks_advanced
+  )
+  networks_advanced_list = tolist([local.networks_advanced])
 }
 
 data "docker_registry_image" "default" {
@@ -98,12 +103,12 @@ resource "docker_container" "default" {
   }
 
   dynamic "networks_advanced" {
-    for_each = var.networks_advanced == null ? [] : [var.networks_advanced]
+    for_each = local.networks_advanced_list == null ? [] : local.networks_advanced_list
     content {
-      name         = var.networks_advanced.name
-      ipv4_address = var.networks_advanced.ipv4_address
-      ipv6_address = var.networks_advanced.ipv6_address
-      aliases      = var.networks_advanced.aliases
+      name         = networks_advanced.value.name
+      ipv4_address = networks_advanced.value.ipv4_address
+      ipv6_address = networks_advanced.value.ipv6_address
+      aliases      = networks_advanced.value.aliases
     }
   }
 
