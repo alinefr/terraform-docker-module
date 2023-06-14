@@ -157,7 +157,7 @@ No modules.
 | <a name="input_image"></a> [image](#input\_image) | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
 | <a name="input_named_volumes"></a> [named\_volumes](#input\_named\_volumes) | Mount named volumes | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>    create         = bool<br>  }))</pre> | `{}` | no |
 | <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | Specify a custom network mode | `string` | `null` | no |
-| <a name="input_networks_advanced"></a> [networks\_advanced](#input\_networks\_advanced) | Advanced network options for the container<pre>networks_advanced = [<br>  {<br>    name         = "proxy-tier"<br>    ipv4_address = "10.0.0.14"<br>  },<br>  {<br>    name         = "media-tier"<br>    ipv4_address = "172.0.0.14"<br>  }<br>]</pre> | `any` | `null` | no |
+| <a name="input_networks_advanced"></a> [networks\_advanced](#input\_networks\_advanced) | Advanced network options for the container | <pre>object({<br>    name         = string<br>    aliases      = list(string)<br>    ipv4_address = string<br>    ipv6_address = string<br>  })</pre> | `null` | no |
 | <a name="input_ports"></a> [ports](#input\_ports) | Expose ports | <pre>list(object({<br>    internal = number<br>    external = number<br>    protocol = string<br>  }))</pre> | `null` | no |
 | <a name="input_privileged"></a> [privileged](#input\_privileged) | Give extended privileges to this container | `bool` | `false` | no |
 | <a name="input_restart_policy"></a> [restart\_policy](#input\_restart\_policy) | Restart policy. Default: no | `string` | `"no"` | no |
