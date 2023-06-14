@@ -95,14 +95,23 @@ variable "capabilities" {
   default = null
 }
 variable "networks_advanced" {
-  description = "Advanced network options for the container"
-  type = object({
-    name         = string
-    aliases      = list(string)
-    ipv4_address = string
-    ipv6_address = string
-  })
-  default = null
+  description = <<EOD
+Advanced network options for the container
+```
+networks_advanced = [
+  {
+    name         = "proxy-tier"
+    ipv4_address = "10.0.0.14"
+  },
+  {
+    name         = "media-tier"
+    ipv4_address = "172.0.0.14"
+  }
+]
+```
+EOD
+  type        = any
+  default     = null
 }
 variable "healthcheck" {
   description = "Test to check if container is healthy"
