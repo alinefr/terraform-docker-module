@@ -2,22 +2,6 @@ variable "container_name" {
   type = string
 }
 
-variable "network_name" {
-  type = string
-}
-
-variable "gateway" {
-  type = string
-}
-
-variable "ipv4_address" {
-  type = string
-}
-
-variable "subnet" {
-  type = string
-}
-
 variable "ports" {
   type    = list(any)
   default = null
@@ -41,4 +25,14 @@ variable "devices" {
 variable "environment" {
   type    = map(string)
   default = null
+}
+
+variable "networks_advanced" {
+  type    = list(any)
+  default = []
+}
+
+variable "docker_networks" {
+  type    = map(any)
+  default = {}
 }
