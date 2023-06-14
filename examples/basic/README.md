@@ -23,7 +23,7 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_container_name"></a> [container\_name](#input\_container\_name) | n/a | `string` | n/a | yes |
 | <a name="input_devices"></a> [devices](#input\_devices) | n/a | `map(any)` | `{}` | no |
-| <a name="input_docker_networks"></a> [docker\_networks](#input\_docker\_networks) | n/a | `map(any)` | `{}` | no |
+| <a name="input_docker_networks"></a> [docker\_networks](#input\_docker\_networks) | n/a | `list(any)` | `[]` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | n/a | `map(string)` | `null` | no |
 | <a name="input_host_paths"></a> [host\_paths](#input\_host\_paths) | n/a | `map(any)` | `{}` | no |
 | <a name="input_named_volumes"></a> [named\_volumes](#input\_named\_volumes) | n/a | `map(any)` | `{}` | no |

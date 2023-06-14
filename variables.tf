@@ -97,7 +97,7 @@ variable "capabilities" {
 variable "networks_advanced" {
   description = <<EOD
 Advanced network options for the container
-```
+```hcl
 networks_advanced = [
   {
     name         = "proxy-tier"
@@ -130,13 +130,21 @@ variable "environment" {
   default     = null
 }
 variable "docker_networks" {
-  description = "List of custom networks to create"
-  type = map(object({
-    ipam_config = object({
-      aux_address = map(string)
-      gateway     = string
-      subnet      = string
-    })
-  }))
-  default = {}
+  description = <<EOD
+List of custom networks to create
+```hcl
+docker_networks = [
+  {
+    name = "proxy-tier"
+    ipam_config = {
+      aux_address = {}
+      gateway     = "10.0.0.1"
+      subnet      = "10.0.0.0/24"
+    }
+  }
+]
+```
+EOD
+  type        = any
+  default     = null
 }

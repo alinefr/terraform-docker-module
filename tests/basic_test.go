@@ -12,8 +12,9 @@ func TestTerraformDockerSimple(t *testing.T) {
   containerName := "single_port"
 
 
-  dockerNetworks := map[string]interface{}{
-    "nginx_network": map[string]interface{}{
+  dockerNetworks := []map[string]interface{}{
+    {
+      "name": "nginx_network",
       "ipam_config": map[string]interface{}{
         "aux_address": map[string]interface{}{},
         "gateway": "10.0.30.1",
@@ -122,8 +123,9 @@ func TestTerraformDockerSimple(t *testing.T) {
 
 func TestTerraformDockerMultiple(t *testing.T) {
   containerName := "multiple_ports"
-  dockerNetworks := map[string]interface{}{
-    "nginx_network": map[string]interface{}{
+  dockerNetworks := []map[string]interface{}{
+    {
+      "name": "nginx_network",
       "ipam_config": map[string]interface{}{
         "aux_address": map[string]interface{}{},
         "gateway": "10.0.30.1",
@@ -274,8 +276,9 @@ func TestTerraformDockerMultiple(t *testing.T) {
 
 func TestTerraformDockerWithoutPortsVolumesDevices(t *testing.T) {
   containerName := "without"
-  dockerNetworks := map[string]interface{}{
-    "nginx_network": map[string]interface{}{
+  dockerNetworks := []map[string]interface{}{
+    {
+      "name": "nginx_network",
       "ipam_config": map[string]interface{}{
         "aux_address": map[string]interface{}{},
         "gateway": "10.0.30.1",
@@ -327,8 +330,9 @@ func TestTerraformDockerWithoutPortsVolumesDevices(t *testing.T) {
 
 func TestTerraformDockerEnvironments(t *testing.T) {
   containerName := "environments"
-  dockerNetworks := map[string]interface{}{
-    "nginx_network": map[string]interface{}{
+  dockerNetworks := []map[string]interface{}{
+    {
+      "name": "nginx_network",
       "ipam_config": map[string]interface{}{
         "aux_address": map[string]interface{}{},
         "gateway": "10.0.30.1",

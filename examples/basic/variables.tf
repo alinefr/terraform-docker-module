@@ -33,6 +33,6 @@ variable "networks_advanced" {
 }
 
 variable "docker_networks" {
-  type    = map(any)
-  default = {}
+  type    = list(any)
+  default = []
 }
