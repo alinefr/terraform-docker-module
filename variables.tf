@@ -95,14 +95,23 @@ variable "capabilities" {
   default = null
 }
 variable "networks_advanced" {
-  description = "Advanced network options for the container"
-  type = object({
-    name         = string
-    aliases      = list(string)
-    ipv4_address = string
-    ipv6_address = string
-  })
-  default = null
+  description = <<EOD
+Advanced network options for the container
+```hcl
+networks_advanced = [
+  {
+    name         = "proxy-tier"
+    ipv4_address = "10.0.0.14"
+  },
+  {
+    name         = "media-tier"
+    ipv4_address = "172.0.0.14"
+  }
+]
+```
+EOD
+  type        = any
+  default     = null
 }
 variable "healthcheck" {
   description = "Test to check if container is healthy"
@@ -121,13 +130,21 @@ variable "environment" {
   default     = null
 }
 variable "docker_networks" {
-  description = "List of custom networks to create"
-  type = map(object({
-    ipam_config = object({
-      aux_address = map(string)
-      gateway     = string
-      subnet      = string
-    })
-  }))
-  default = {}
+  description = <<EOD
+List of custom networks to create
+```hcl
+docker_networks = [
+  {
+    name = "proxy-tier"
+    ipam_config = {
+      aux_address = {}
+      gateway     = "10.0.0.1"
+      subnet      = "10.0.0.0/24"
+    }
+  }
+]
+```
+EOD
+  type        = any
+  default     = null
 }

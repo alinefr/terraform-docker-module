@@ -1,21 +1,49 @@
+variable "image" {
+  type = string
+}
+
 variable "container_name" {
   type = string
 }
 
-variable "network_name" {
-  type = string
+variable "hostname" {
+  type    = string
+  default = null
 }
 
-variable "gateway" {
-  type = string
+variable "restart_policy" {
+  type    = string
+  default = null
 }
 
-variable "ipv4_address" {
-  type = string
+variable "working_dir" {
+  type    = string
+  default = null
 }
 
-variable "subnet" {
-  type = string
+variable "privileged" {
+  type    = bool
+  default = false
+}
+
+variable "network_mode" {
+  type    = string
+  default = null
+}
+
+variable "dns" {
+  type    = list(string)
+  default = null
+}
+
+variable "entrypoint" {
+  type    = list(string)
+  default = null
+}
+
+variable "command" {
+  type    = list(string)
+  default = null
 }
 
 variable "ports" {
@@ -38,7 +66,22 @@ variable "devices" {
   default = {}
 }
 
+variable "capabilities" {
+  type    = map(any)
+  default = {}
+}
+
 variable "environment" {
   type    = map(string)
   default = null
+}
+
+variable "networks_advanced" {
+  type    = list(any)
+  default = []
+}
+
+variable "docker_networks" {
+  type    = list(any)
+  default = []
 }

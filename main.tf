@@ -22,16 +22,17 @@ resource "docker_volume" "default" {
 }
 
 resource "docker_network" "default" {
-  for_each = var.docker_networks
-  name     = each.key
+  for_each = {
+    for i, v in var.docker_networks : v.name => v
+  }
+  name = each.value.name
 
   ipam_config {
-    aux_address = each.value.ipam_config.aux_address
-    gateway     = each.value.ipam_config.gateway
-    subnet      = each.value.ipam_config.subnet
+    aux_address = lookup(each.value.ipam_config, "aux_address", null)
+    gateway     = lookup(each.value.ipam_config, "gateway", null)
+    subnet      = lookup(each.value.ipam_config, "subnet", null)
   }
 }
-
 
 resource "docker_container" "default" {
   name         = var.container_name != null ? var.container_name : local.container_name
@@ -98,12 +99,12 @@ resource "docker_container" "default" {
   }
 
   dynamic "networks_advanced" {
-    for_each = var.networks_advanced == null ? [] : [var.networks_advanced]
+    for_each = var.networks_advanced == null ? [] : var.networks_advanced
     content {
-      name         = var.networks_advanced.name
-      ipv4_address = var.networks_advanced.ipv4_address
-      ipv6_address = var.networks_advanced.ipv6_address
-      aliases      = var.networks_advanced.aliases
+      name         = lookup(networks_advanced.value, "name", null)
+      ipv4_address = lookup(networks_advanced.value, "ipv4_address", null)
+      ipv6_address = lookup(networks_advanced.value, "ipv6_address", null)
+      aliases      = lookup(networks_advanced.value, "aliases", null)
     }
   }
 
