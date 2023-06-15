@@ -1,9 +1,17 @@
 module "docker" {
   source = "../.."
 
-  image             = "nginx"
+  image             = var.image
   container_name    = var.container_name
-  restart_policy    = "always"
+  hostname          = var.hostname
+  restart_policy    = var.restart_policy
+  working_dir       = var.working_dir
+  privileged        = var.privileged
+  network_mode      = var.network_mode
+  dns               = var.dns
+  entrypoint        = var.entrypoint
+  command           = var.command
+  capabilities      = var.capabilities
   environment       = var.environment
   docker_networks   = var.docker_networks
   ports             = var.ports

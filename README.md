@@ -168,7 +168,23 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_capabilities"></a> [capabilities](#output\_capabilities) | n/a |
+| <a name="output_command"></a> [command](#output\_command) | n/a |
+| <a name="output_container_name"></a> [container\_name](#output\_container\_name) | n/a |
 | <a name="output_devices"></a> [devices](#output\_devices) | n/a |
+| <a name="output_dns"></a> [dns](#output\_dns) | n/a |
+| <a name="output_docker_networks"></a> [docker\_networks](#output\_docker\_networks) | n/a |
+| <a name="output_docker_volumes"></a> [docker\_volumes](#output\_docker\_volumes) | n/a |
+| <a name="output_entrypoint"></a> [entrypoint](#output\_entrypoint) | n/a |
 | <a name="output_environment"></a> [environment](#output\_environment) | n/a |
+| <a name="output_healthcheck"></a> [healthcheck](#output\_healthcheck) | n/a |
+| <a name="output_hostname"></a> [hostname](#output\_hostname) | n/a |
+| <a name="output_image"></a> [image](#output\_image) | n/a |
+| <a name="output_network_mode"></a> [network\_mode](#output\_network\_mode) | n/a |
+| <a name="output_networks_advanced"></a> [networks\_advanced](#output\_networks\_advanced) | n/a |
+| <a name="output_ports"></a> [ports](#output\_ports) | n/a |
+| <a name="output_privileged"></a> [privileged](#output\_privileged) | n/a |
+| <a name="output_restart"></a> [restart](#output\_restart) | n/a |
 | <a name="output_volumes"></a> [volumes](#output\_volumes) | n/a |
+| <a name="output_working_dir"></a> [working\_dir](#output\_working\_dir) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

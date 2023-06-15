@@ -1,5 +1,49 @@
+variable "image" {
+  type = string
+}
+
 variable "container_name" {
   type = string
+}
+
+variable "hostname" {
+  type    = string
+  default = null
+}
+
+variable "restart_policy" {
+  type    = string
+  default = null
+}
+
+variable "working_dir" {
+  type    = string
+  default = null
+}
+
+variable "privileged" {
+  type    = bool
+  default = false
+}
+
+variable "network_mode" {
+  type    = string
+  default = null
+}
+
+variable "dns" {
+  type    = list(string)
+  default = null
+}
+
+variable "entrypoint" {
+  type    = list(string)
+  default = null
+}
+
+variable "command" {
+  type    = list(string)
+  default = null
 }
 
 variable "ports" {
@@ -18,6 +62,11 @@ variable "host_paths" {
 }
 
 variable "devices" {
+  type    = map(any)
+  default = {}
+}
+
+variable "capabilities" {
   type    = map(any)
   default = {}
 }
