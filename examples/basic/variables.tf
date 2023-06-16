@@ -1,87 +1,150 @@
 variable "image" {
-  type = string
+  description = "Specify the image to start the container from. Can either be a repository/tag or a partial image ID"
+  type        = string
 }
-
 variable "container_name" {
-  type = string
+  description = "Custom container name"
+  type        = string
+  default     = null
 }
-
 variable "hostname" {
-  type    = string
-  default = null
+  description = "Set docker hostname"
+  type        = string
+  default     = null
 }
-
-variable "restart_policy" {
-  type    = string
-  default = null
-}
-
 variable "working_dir" {
-  type    = string
-  default = null
+  description = "Working directory inside the container"
+  type        = string
+  default     = null
 }
-
+variable "restart_policy" {
+  description = "Restart policy. Default: no"
+  type        = string
+  default     = "no"
+}
 variable "privileged" {
-  type    = bool
-  default = false
+  description = "Give extended privileges to this container"
+  type        = bool
+  default     = false
 }
-
 variable "network_mode" {
-  type    = string
-  default = null
+  description = "Specify a custom network mode"
+  type        = string
+  default     = null
 }
-
 variable "dns" {
-  type    = list(string)
-  default = null
+  description = "Set custom dns servers for the container"
+  type        = list(string)
+  default     = null
 }
-
 variable "entrypoint" {
-  type    = list(string)
-  default = null
+  description = "Override the default entrypoint"
+  type        = list(string)
+  default     = null
 }
-
 variable "command" {
-  type    = list(string)
-  default = null
+  description = "Override the default command"
+  type        = list(string)
+  default     = null
 }
-
 variable "ports" {
-  type    = list(any)
+  description = "Expose ports"
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
   default = null
 }
-
 variable "named_volumes" {
-  type    = map(any)
+  description = "Mount named volumes"
+  type = map(object({
+    container_path = string
+    read_only      = bool
+    create         = bool
+  }))
   default = {}
 }
-
 variable "host_paths" {
-  type    = map(any)
+  description = "Mount host paths"
+  type = map(object({
+    container_path = string
+    read_only      = bool
+  }))
   default = {}
 }
-
+variable "volumes_from_containers" {
+  description = "Mount volumes from another container"
+  type        = list(any)
+  default     = null
+}
 variable "devices" {
-  type    = map(any)
+  description = "Device mappings"
+  type = map(object({
+    container_path = string
+    permissions    = string
+  }))
   default = {}
 }
-
 variable "capabilities" {
-  type    = map(any)
-  default = {}
-}
-
-variable "environment" {
-  type    = map(string)
+  description = "Add or drop container capabilities"
+  type = object({
+    add  = list(string)
+    drop = list(string)
+  })
   default = null
 }
-
 variable "networks_advanced" {
-  type    = list(any)
-  default = []
+  description = <<EOD
+Advanced network options for the container
+```hcl
+networks_advanced = [
+  {
+    name         = "proxy-tier"
+    ipv4_address = "10.0.0.14"
+  },
+  {
+    name         = "media-tier"
+    ipv4_address = "172.0.0.14"
+  }
+]
+```
+EOD
+  type        = any
+  default     = null
 }
-
+variable "healthcheck" {
+  description = "Test to check if container is healthy"
+  type = object({
+    interval     = string
+    retries      = number
+    start_period = string
+    test         = list(string)
+    timeout      = string
+  })
+  default = null
+}
+variable "environment" {
+  description = "Add environment variables"
+  type        = map(string)
+  default     = null
+}
 variable "docker_networks" {
-  type    = list(any)
-  default = []
+  description = <<EOD
+List of custom networks to create
+```hcl
+docker_networks = [
+  {
+    name = "proxy-tier"
+    ipam_config = {
+      aux_address = {}
+      gateway     = "10.0.0.1"
+      subnet      = "10.0.0.0/24"
+    }
+  }
+]
+```
+EOD
+  type        = any
+  default     = []
 }

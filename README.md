@@ -148,7 +148,7 @@ No modules.
 | <a name="input_container_name"></a> [container\_name](#input\_container\_name) | Custom container name | `string` | `null` | no |
 | <a name="input_devices"></a> [devices](#input\_devices) | Device mappings | <pre>map(object({<br>    container_path = string<br>    permissions    = string<br>  }))</pre> | `{}` | no |
 | <a name="input_dns"></a> [dns](#input\_dns) | Set custom dns servers for the container | `list(string)` | `null` | no |
-| <a name="input_docker_networks"></a> [docker\_networks](#input\_docker\_networks) | List of custom networks to create<pre>hcl<br>docker_networks = [<br>  {<br>    name = "proxy-tier"<br>    ipam_config = {<br>      aux_address = {}<br>      gateway     = "10.0.0.1"<br>      subnet      = "10.0.0.0/24"<br>    }<br>  }<br>]</pre> | `any` | `null` | no |
+| <a name="input_docker_networks"></a> [docker\_networks](#input\_docker\_networks) | List of custom networks to create<pre>hcl<br>docker_networks = [<br>  {<br>    name = "proxy-tier"<br>    ipam_config = {<br>      aux_address = {}<br>      gateway     = "10.0.0.1"<br>      subnet      = "10.0.0.0/24"<br>    }<br>  }<br>]</pre> | `any` | `[]` | no |
 | <a name="input_entrypoint"></a> [entrypoint](#input\_entrypoint) | Override the default entrypoint | `list(string)` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Add environment variables | `map(string)` | `null` | no |
 | <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
