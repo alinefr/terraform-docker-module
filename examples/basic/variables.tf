@@ -68,7 +68,7 @@ variable "devices" {
 
 variable "capabilities" {
   type    = map(any)
-  default = {}
+  default = null
 }
 
 variable "environment" {

@@ -146,5 +146,5 @@ docker_networks = [
 ```
 EOD
   type        = any
-  default     = null
+  default     = []
 }

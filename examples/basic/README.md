@@ -21,7 +21,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_capabilities"></a> [capabilities](#input\_capabilities) | n/a | `map(any)` | `{}` | no |
+| <a name="input_capabilities"></a> [capabilities](#input\_capabilities) | n/a | `map(any)` | `null` | no |
 | <a name="input_command"></a> [command](#input\_command) | n/a | `list(string)` | `null` | no |
 | <a name="input_container_name"></a> [container\_name](#input\_container\_name) | n/a | `string` | n/a | yes |
 | <a name="input_devices"></a> [devices](#input\_devices) | n/a | `map(any)` | `{}` | no |
