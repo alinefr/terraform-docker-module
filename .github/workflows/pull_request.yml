@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
+    - uses: GuillaumeFalourd/diff-action@v1
+      with:
+        first_file_path: variables.tf
+        second_file_path: examples/basic/variables.tf
+        expected_result: PASSED
     - uses: hashicorp/setup-terraform@v1.2.1
       with:
         terraform_wrapper: false
