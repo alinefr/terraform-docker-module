@@ -29,10 +29,11 @@ No resources.
 | <a name="input_docker_networks"></a> [docker\_networks](#input\_docker\_networks) | List of custom networks to create<pre>hcl<br>docker_networks = [<br>  {<br>    name = "proxy-tier"<br>    ipam_config = {<br>      aux_address = {}<br>      gateway     = "10.0.0.1"<br>      subnet      = "10.0.0.0/24"<br>    }<br>  }<br>]</pre> | `any` | `[]` | no |
 | <a name="input_entrypoint"></a> [entrypoint](#input\_entrypoint) | Override the default entrypoint | `list(string)` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Add environment variables | `map(string)` | `null` | no |
+| <a name="input_existing_image"></a> [existing\_image](#input\_existing\_image) | Specify an existing image from another module | `string` | `null` | no |
 | <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | Test to check if container is healthy | <pre>object({<br>    interval     = string<br>    retries      = number<br>    start_period = string<br>    test         = list(string)<br>    timeout      = string<br>  })</pre> | `null` | no |
 | <a name="input_host_paths"></a> [host\_paths](#input\_host\_paths) | Mount host paths | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>  }))</pre> | `{}` | no |
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | Set docker hostname | `string` | `null` | no |
-| <a name="input_image"></a> [image](#input\_image) | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | n/a | yes |
+| <a name="input_image"></a> [image](#input\_image) | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | `null` | no |
 | <a name="input_named_volumes"></a> [named\_volumes](#input\_named\_volumes) | Mount named volumes | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>    create         = bool<br>  }))</pre> | `{}` | no |
 | <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | Specify a custom network mode | `string` | `null` | no |
 | <a name="input_networks_advanced"></a> [networks\_advanced](#input\_networks\_advanced) | Advanced network options for the container<pre>hcl<br>networks_advanced = [<br>  {<br>    name         = "proxy-tier"<br>    ipv4_address = "10.0.0.14"<br>  },<br>  {<br>    name         = "media-tier"<br>    ipv4_address = "172.0.0.14"<br>  }<br>]</pre> | `any` | `null` | no |

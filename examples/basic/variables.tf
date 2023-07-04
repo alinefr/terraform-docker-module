@@ -1,6 +1,12 @@
 variable "image" {
   description = "Specify the image to start the container from. Can either be a repository/tag or a partial image ID"
   type        = string
+  default     = null
+}
+variable "existing_image" {
+  description = "Specify an existing image from another module"
+  type        = string
+  default     = null
 }
 variable "container_name" {
   description = "Custom container name"
