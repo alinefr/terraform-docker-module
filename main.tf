@@ -1,16 +1,18 @@
 locals {
-  image          = var.image
+  image          = var.image == null ? var.existing_image : var.image
   img_nouser     = replace(local.image, "/", "") != local.image ? split("/", local.image)[1] : split("/", local.image)[0]
   container_name = split(":", local.img_nouser)[0]
 }
 
 data "docker_registry_image" "default" {
-  name = var.image
+  for_each = var.existing_image == null ? toset([var.image]) : toset([])
+  name     = var.image
 }
 
 resource "docker_image" "default" {
-  name          = data.docker_registry_image.default.name
-  pull_triggers = [data.docker_registry_image.default.sha256_digest]
+  for_each      = var.existing_image == null ? toset([var.image]) : toset([])
+  name          = data.docker_registry_image.default[var.image].name
+  pull_triggers = [data.docker_registry_image.default[var.image].sha256_digest]
 }
 
 resource "docker_volume" "default" {
@@ -36,7 +38,7 @@ resource "docker_network" "default" {
 
 resource "docker_container" "default" {
   name         = var.container_name != null ? var.container_name : local.container_name
-  image        = docker_image.default.image_id
+  image        = var.existing_image != null ? var.existing_image : docker_image.default[var.image].image_id
   hostname     = var.hostname
   restart      = var.restart_policy
   privileged   = var.privileged

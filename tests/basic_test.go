@@ -126,7 +126,7 @@ func validateOutputs(t *testing.T, opts *terraform.Options) {
 	}
 
 	// Image
-	image, _ := jsonParsed.JSONPointer("/image/value")
+	image, _ := jsonParsed.JSONPointer("/image_name/value")
 	assert.Equal(t, "nginx:latest", image.Data().(string))
 
 	// Container name

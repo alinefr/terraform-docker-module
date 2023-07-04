@@ -1,5 +1,5 @@
-output "image" {
-  value = module.docker.image
+output "image_name" {
+  value = module.docker.image_name
 }
 
 output "container_name" {
