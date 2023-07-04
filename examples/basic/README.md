@@ -58,7 +58,7 @@ No resources.
 | <a name="output_environment"></a> [environment](#output\_environment) | n/a |
 | <a name="output_healthcheck"></a> [healthcheck](#output\_healthcheck) | n/a |
 | <a name="output_hostname"></a> [hostname](#output\_hostname) | n/a |
-| <a name="output_image"></a> [image](#output\_image) | n/a |
+| <a name="output_image_name"></a> [image\_name](#output\_image\_name) | n/a |
 | <a name="output_network_mode"></a> [network\_mode](#output\_network\_mode) | n/a |
 | <a name="output_networks_advanced"></a> [networks\_advanced](#output\_networks\_advanced) | n/a |
 | <a name="output_ports"></a> [ports](#output\_ports) | n/a |

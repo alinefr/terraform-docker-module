@@ -1,4 +1,8 @@
-output "image" {
+output "image_name" {
+  value = var.existing_image != null ? var.existing_image : docker_image.default[var.image].name
+}
+
+output "image_id" {
   value = var.existing_image != null ? var.existing_image : docker_image.default[var.image].image_id
 }
 
