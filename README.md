@@ -156,6 +156,7 @@ No modules.
 | <a name="input_host_paths"></a> [host\_paths](#input\_host\_paths) | Mount host paths | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>  }))</pre> | `{}` | no |
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | Set docker hostname | `string` | `null` | no |
 | <a name="input_image"></a> [image](#input\_image) | Specify the image to start the container from. Can either be a repository/tag or a partial image ID | `string` | `null` | no |
+| <a name="input_init"></a> [init](#input\_init) | If init process should be used as the PID 1 in the container | `bool` | `false` | no |
 | <a name="input_named_volumes"></a> [named\_volumes](#input\_named\_volumes) | Mount named volumes | <pre>map(object({<br>    container_path = string<br>    read_only      = bool<br>    create         = bool<br>  }))</pre> | `{}` | no |
 | <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | Specify a custom network mode | `string` | `null` | no |
 | <a name="input_networks_advanced"></a> [networks\_advanced](#input\_networks\_advanced) | Advanced network options for the container<pre>hcl<br>networks_advanced = [<br>  {<br>    name         = "proxy-tier"<br>    ipv4_address = "10.0.0.14"<br>  },<br>  {<br>    name         = "media-tier"<br>    ipv4_address = "172.0.0.14"<br>  }<br>]</pre> | `any` | `null` | no |
@@ -182,6 +183,7 @@ No modules.
 | <a name="output_hostname"></a> [hostname](#output\_hostname) | n/a |
 | <a name="output_image_id"></a> [image\_id](#output\_image\_id) | n/a |
 | <a name="output_image_name"></a> [image\_name](#output\_image\_name) | n/a |
+| <a name="output_init"></a> [init](#output\_init) | n/a |
 | <a name="output_network_mode"></a> [network\_mode](#output\_network\_mode) | n/a |
 | <a name="output_networks_advanced"></a> [networks\_advanced](#output\_networks\_advanced) | n/a |
 | <a name="output_ports"></a> [ports](#output\_ports) | n/a |

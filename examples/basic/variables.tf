@@ -3,6 +3,11 @@ variable "image" {
   type        = string
   default     = null
 }
+variable "init" {
+  description = "If init process should be used as the PID 1 in the container"
+  type        = bool
+  default     = false
+}
 variable "existing_image" {
   description = "Specify an existing image from another module"
   type        = string
